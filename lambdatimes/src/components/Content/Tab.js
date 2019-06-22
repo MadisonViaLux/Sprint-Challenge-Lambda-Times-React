@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 const Tab = props => {
   /* Using your props, determine if the `tab` prop matches the `selectedTab` prop, 
@@ -8,27 +9,27 @@ const Tab = props => {
   console.log(props)
 
     // if (props.tab === props.selectedTab) {
-    //   props.tab.classList.add('tab active-tab')
+    //   props.tab.className.add('tab active-tab')
     // } else {
-    //   props.tab.classList.add('tab')
+    //   props.tab.className.add('tab')
     // }
 
-function selectTabHandler(props){
-  if(props.tab === props.selectedTab){
-    props.className='tab active-tab'
-  } else{
-    props.className='tab'
-  }
-}
+// function selectTabHandler(props){
+//   if(props === props.selectedTab){
+//     props.tab.className.add('tab active-tab')
+//     } else {
+//       props.tab.className.add('tab')
+//     }
+// }
 
 
   return (
     <div
-      className={''}
-      onClick={() => ( selectTabHandler()
+      className={props.tab === props.selectTab ? 'tab active-tab' : 'tab'}
+      onClick={() =>  props.selectTabHandler(props.tab)}
         /* Replace this dummy click handler function with your selectTabHandler function from props 
          you'll need to pass the `tab` in as an argument to this handler. */
-         )}
+         
     >
       {props.tab.toUpperCase()}
     </div>
@@ -36,5 +37,11 @@ function selectTabHandler(props){
 };
 
 // Make sure you include PropTypes on your props.
+
+Tab.propTypes = {
+  tabs: PropTypes.shape({
+    tab: PropTypes.string.isRequired
+  })
+}
 
 export default Tab;
